@@ -1,0 +1,20 @@
+global:
+  site_name: 'Estimatick'
+footer:
+  slogan: "Collaborative Estimations Made Simple"
+  copyright: "© 2025 Estimatick. Tous droits réservés."
+  navigation:
+    title: "Navigation"
+    home: "Accueil"
+    features: "Fonctionnalités"
+    documentation: "Documentation / Aide"
+  contact:
+    title: "Contact"
+    form: "Formulaire de contact"
+  links:
+    legal_notice: "Mentions légales"
+    privacy_policy: "Politique de confidentialité"
+    personal_data: "Données personnelles"
+  made_with_love: "Made with ❤️ for dev teams"
+  credits: "Créé avec passion pour les équipes de développement"
+
