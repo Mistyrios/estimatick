@@ -1,0 +1,70 @@
+services:
+
+  # Web Server Service
+  etk_nginx:
+    image: nginx:alpine
+    container_name: etk_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - etk_php
+      - etk_pgsql
+    networks:
+      - etk_network
+
+  # Database Service
+  etk_pgsql:
+    image: postgres:alpine
+    platform: linux/amd64
+    container_name: etk_pgsql
+    volumes:
+      - ./docker/database:/database
+      - pgsql_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: rephytox
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: databaseSuperStrongPassword
+    networks:
+      - etk_network
+
+  # Application Service
+  etk_php:
+    container_name: etk_php
+    platform: linux/amd64
+    build:
+      context: ./
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ./:/var/www
+    ports:
+      - "9000:9000"
+    working_dir: /var/www
+    environment:
+      PHP_IDE_CONFIG: serverName=localhost
+    networks:
+      - etk_network
+
+  # Mailer Service
+  etk_mailer:
+    container_name: etk_mailer
+    image: axllent/mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - etk_network
+
+volumes:
+  pgsql_data:
+
+networks:
+  etk_network:
+    driver: bridge
