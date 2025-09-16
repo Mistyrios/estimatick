@@ -1,0 +1,47 @@
+#Get arguments of a command
+# Takes the first target as command
+Command := $(firstword $(MAKECMDGOALS))
+# Skips the first word
+Arguments := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+
+# Constants
+BRANCH_FOR_GIT_REBASE=
+
+# Targets
+%::
+	@true
+
+# List of commands available in the Makefile (Always keep it as the first target of the Makefile)
+help:
+	@echo "\n\033[1mCommandes make disponibles :\033[0m"
+	@awk -F ':.*?## ' '/^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m make %-16s\033[0m 	: %s\n", $$1, $$2 }' $(MAKEFILE_LIST) | sort
+
+# Other targets
+build-assets: ## Compile les assets
+	@php bin/console tailwind:build --minify
+	@php bin/console asset-map:compile
+
+deploy: ## Déploie l'application
+	@make fix-rights
+	@make update-git
+	@make install-vendor
+	@make migrate
+	@make build-assets
+	@make fix-rights
+
+install-vendor: ## Installe les dépendances Composer du projet
+	@composer install
+
+migrate: ## Exécute les migrations
+	@php bin/console doctrine:migrations:migrate
+
+sf: ## Exécute une commande Symfony
+	@php bin/console $(Arguments)
+
+update-git: ## Met à jour le dépôt Git
+	@git fetch --prune && git rebase origin/$(BRANCH_FOR_GIT_REBASE)
+
+update-vendor: ## Met à jour les dépendances Composer du projet
+	@composer update
+
+
