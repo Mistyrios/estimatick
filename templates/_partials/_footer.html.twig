@@ -27,12 +27,9 @@
                     <p><a href="mailto:support@estimatick.com" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:underline">support@estimatick.com</a></p>
                 </div>
 
-                <!-- Language Selector (Optional) -->
                 <div class="mt-4">
-                    <select class="text-xs bg-transparent border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-gray-600 dark:text-gray-400">
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="en">🇬🇧 English</option>
-                    </select>
+                    <!-- Language Selector (Optional) -->
+                    {% include '_partials/_language_switcher.html.twig' with {'dropdownId': 'footer-language-dropdown'} %}
                 </div>
             </div>
         </div>

@@ -1,0 +1,25 @@
+global:
+  site_name: 'Estimatick'
+home:
+  title: "Home"
+  welcome: "Hello"
+  message: "This friendly message is coming from"
+  controller_location: "Your controller at"
+  template_location: "Your template at"
+footer:
+  slogan: "Collaborative Estimations Made Simple"
+  copyright: "© 2025 Estimatick. All rights reserved."
+  navigation:
+    title: "Navigation"
+    home: "Home"
+    features: "Features"
+    documentation: "Documentation / Help"
+  contact:
+    title: "Contact"
+    form: "Contact form"
+  links:
+    legal_notice: "Legal notice"
+    privacy_policy: "Privacy policy"
+    personal_data: "Personal data"
+  made_with_love: "Made with ❤️ for dev teams"
+  credits: "Created with passion for development teams"
