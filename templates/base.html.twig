@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'global.site_name' | trans }} - {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('icons/favicon.ico') }}" type="image/x-icon">
+    {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+        <script>
+            // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        </script>
         {% endblock %}
-    </head>
-    <body>
+</head>
+<body>
+{% include '_partials/_flash_messages.html.twig' %}
+{% include '_partials/_navbar.html.twig' %}
+<div class="main min-h-screen flex flex-col gap-8 pt-20 ">
+    <main class="w-full m-auto my-4 flex-grow px-4">
         {% block body %}{% endblock %}
-    </body>
+    </main>
+</div>
+{% include '_partials/_footer.html.twig' %}
+</body>
 </html>

@@ -1,3 +1,26 @@
-body {
-    background-color: skyblue;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-size: 15px; /** 1rem will be 15px */
+        @apply text-gray-900;
+    }
+
+    html.dark {
+        @apply text-white;
+    }
+}
+
+.main {
+    @apply flex flex-col gap-8;
+}
+
+.dark .main {
+    @apply bg-stone-700;
+}
+
+h1 {
+    @apply mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white;
 }
