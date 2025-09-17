@@ -33,9 +33,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
 
-# Add this after the nodejs/npm installation
-RUN apk add --no-cache watchman
-
 # Install GD dependencies and GD extension
 RUN apk add --no-cache \
     libjpeg-turbo-dev \
