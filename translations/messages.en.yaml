@@ -1,5 +1,37 @@
 global:
   site_name: 'Estimatick'
+homepage:
+  title: "Acceuil"
+  hero:
+    title: "Planning Poker Made Simple"
+    subtitle: "Estimate your development tasks efficiently with your team using our intuitive planning poker tool. Foster collaboration and achieve better sprint planning results."
+    cta_start: "Start Planning Session"
+    cta_learn: "Learn More"
+  features:
+    title: "Why Choose Our Planning Poker?"
+    subtitle: "Streamline your agile estimation process with features designed for modern development teams."
+    collaboration:
+      title: "Team Collaboration"
+      description: "Real-time voting with your entire development team, fostering better communication and consensus."
+    estimation:
+      title: "Quick Estimation"
+      description: "Fast and efficient story point estimation using Fibonacci sequence or custom card sets."
+    management:
+      title: "Session Management"
+      description: "Create, manage, and track your planning sessions with detailed voting history and analytics."
+    voting:
+      title: "Anonymous Voting"
+      description: "Prevent bias with anonymous voting until all team members have submitted their estimates."
+    usability:
+      title: "Easy to Use"
+      description: "Simple, intuitive interface that requires no training. Start estimating in seconds."
+    cloud:
+      title: "Cloud Based"
+      description: "Access your planning sessions from anywhere. No installation required, works in any browser."
+  cta:
+    title: "Ready to Improve Your Sprint Planning?"
+    subtitle: "Join thousands of agile teams who trust our planning poker tool for accurate story point estimation."
+    button: "Create Free Session"
 home:
   title: "Home"
   welcome: "Hello"
