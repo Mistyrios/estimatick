@@ -146,6 +146,9 @@ start: ## Démarre l'environnement de développement
 stop: ## Arrête l'environnement de développement
 	@docker compose down
 
+twigcsfixer: ## Run TWIG-CS-Fixer
+	@docker exec -it $(PHP_CONTAINER_NAME) ./vendor/bin/twig-cs-fixer lint --fix ./templates/
+
 update-develop: ## Met à jour la branche develop
 	@git switch develop
 	@make update-from-develop

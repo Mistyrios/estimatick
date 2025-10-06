@@ -28,12 +28,14 @@
         "twig/twig": "^2.12|^3.21.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.87.2",
+      "roave/security-advisories": "dev-latest",
+      "friendsofphp/php-cs-fixer": "^3.87.2",
         "phpstan/phpstan": "^2.1.27",
         "squizlabs/php_codesniffer": "^4.0",
         "symfony/maker-bundle": "^1.64",
         "symfony/stopwatch": "7.3.*",
-        "symfony/web-profiler-bundle": "7.3.*"
+        "symfony/web-profiler-bundle": "7.3.*",
+        "vincentlanglet/twig-cs-fixer": "^3.10"
     },
     "config": {
         "allow-plugins": {

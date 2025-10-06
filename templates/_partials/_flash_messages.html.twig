@@ -1,43 +1,43 @@
 <div id="div-alerts" class="absolute top-4 right-4 z-[60]" {{ stimulus_controller('alerts') }}>
     {% if app.flashes is defined %}
         {% set flashTypes = {
-            'success': {
-                'id': 'toast-success',
-                'iconName': 'check-circle-solid',
-                'textColor': 'text-green-500 dark:text-green-400',
-                'bgColor': 'bg-green-100 dark:bg-green-800'
+            success: {
+                id: 'toast-success',
+                iconName: 'check-circle-solid',
+                textColor: 'text-green-500 dark:text-green-400',
+                bgColor: 'bg-green-100 dark:bg-green-800',
             },
-            'error': {
-                'id': 'toast-error',
-                'iconName': 'close-circle-solid',
-                'textColor': 'text-red-500 dark:text-red-400',
-                'bgColor': 'bg-red-100 dark:bg-red-800'
+            error: {
+                id: 'toast-error',
+                iconName: 'close-circle-solid',
+                textColor: 'text-red-500 dark:text-red-400',
+                bgColor: 'bg-red-100 dark:bg-red-800',
             },
-            'warning': {
-                'id': 'toast-warning',
-                'iconName': 'exclamation-circle-solid',
-                'textColor': 'text-orange-500 dark:text-orange-400',
-                'bgColor': 'bg-orange-100 dark:bg-orange-700'
+            warning: {
+                id: 'toast-warning',
+                iconName: 'exclamation-circle-solid',
+                textColor: 'text-orange-500 dark:text-orange-400',
+                bgColor: 'bg-orange-100 dark:bg-orange-700',
             },
-            'info': {
-                'id': 'toast-info',
-                'iconName': 'info-circle-solid',
-                'textColor': 'text-blue-500 dark:text-blue-400',
-                'bgColor': 'bg-blue-100 dark:bg-blue-800'
-            }
+            info: {
+                id: 'toast-info',
+                iconName: 'info-circle-solid',
+                textColor: 'text-blue-500 dark:text-blue-400',
+                bgColor: 'bg-blue-100 dark:bg-blue-800',
+            },
         } %}
-        {% for label, messages in app.flashes  %}
+        {% for label, messages in app.flashes %}
             {% for message in messages %}
                 {% set flash = flashTypes[label] %}
-                {% include '_partials/_flash_message.html.twig' with {
+                {{ include('_partials/_flash_message.html.twig', {
                     id: flash.id,
                     type: label,
                     iconName: flash.iconName,
                     textColor: flash.textColor,
                     bgColor: flash.bgColor,
                     closeTarget: '#' ~ flash.id,
-                    message: message
-                } %}
+                    message: message,
+                }) }}
             {% endfor %}
         {% endfor %}
     {% endif %}

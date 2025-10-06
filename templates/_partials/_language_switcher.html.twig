@@ -3,14 +3,14 @@
 
 {# Configuration des langues disponibles #}
 {% set languages = {
-    'en': {
-        'name': 'English',
-        'flag': 'emojione:flag-for-united-kingdom'
+    en: {
+        name: 'English',
+        flag: 'emojione:flag-for-united-kingdom',
     },
-    'fr': {
-        'name': 'Français',
-        'flag': 'emojione:flag-for-france'
-    }
+    fr: {
+        name: 'Français',
+        flag: 'emojione:flag-for-france',
+    },
 } %}
 
 {# Langue par défaut si locale actuelle non trouvée #}
@@ -27,7 +27,7 @@
     <ul class="py-2 font-medium" role="none">
         {% for locale, language in languages %}
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'locale': locale})) }}"
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({locale: locale})) }}"
                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                    role="menuitem">
                     <div class="flex items-center justify-between gap-1">
