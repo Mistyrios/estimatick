@@ -1,5 +1,37 @@
 global:
   site_name: 'Estimatick'
+homepage:
+  title: "Home"
+  hero:
+    title: "Planning Poker Simplifié"
+    subtitle: "Estimez efficacement vos tâches de développement avec votre équipe grâce à notre outil de planning poker intuitif. Favorisez la collaboration et obtenez de meilleurs résultats de planification de sprint."
+    cta_start: "Démarrer une Session"
+    cta_learn: "En Savoir Plus"
+  features:
+    title: "Pourquoi Choisir Notre Planning Poker ?"
+    subtitle: "Optimisez votre processus d'estimation avec des fonctionnalités conçues pour les équipes de développement."
+    collaboration:
+      title: "Collaboration d'Équipe"
+      description: "Vote en temps réel avec toute votre équipe, favorisant une meilleure communication et un consensus."
+    estimation:
+      title: "Estimation Rapide"
+      description: "Estimation rapide et efficace des tâches en utilisant la séquence de Fibonacci ou des jeux de cartes personnalisés."
+    management:
+      title: "Gestion de Session"
+      description: "Créez, gérez et suivez vos sessions de planification avec un historique de votes détaillé et des analyses."
+    voting:
+      title: "Vote Anonyme"
+      description: "Prévenez les biais avec un vote anonyme jusqu'à ce que tous les membres de l'équipe aient soumis leurs estimations."
+    usability:
+      title: "Facile à Utiliser"
+      description: "Interface simple et intuitive qui ne nécessite aucune formation. Commencez à estimer en quelques secondes."
+    cloud:
+      title: "Basé sur le Cloud"
+      description: "Accédez à vos sessions de planification de n'importe où. Aucune installation requise, fonctionne dans n'importe quel navigateur."
+  cta:
+    title: "Prêt à Améliorer Vos Estimations de tâches ?"
+    subtitle: "Testez notre nouvel outil de planning poker et améliorez l'estimation des tâches de votre équipe."
+    button: "Créer une Session"
 footer:
   slogan: "Collaborative Estimations Made Simple"
   copyright: "© 2025 Estimatick. Tous droits réservés."

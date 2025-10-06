@@ -31,7 +31,7 @@ RUN apk add --no-cache --virtual .build-deps \
     nodejs \
     npm \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
+    && docker-php-ext-install intl
 
 # Install GD dependencies and GD extension
 RUN apk add --no-cache \

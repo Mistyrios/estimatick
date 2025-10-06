@@ -20,13 +20,17 @@ class LocaleListener
 
         // Si une locale est spécifiée dans l'URL, l'utiliser
         if ($locale = $request->attributes->get('locale')) {
-            $request->setLocale($locale);
-            // Sauvegarder en session pour les futures requêtes sans locale
-            $request->getSession()->set('_locale', $locale);
+            if (is_string($locale)) {
+                $request->setLocale($locale);
+                // Sauvegarder en session pour les futures requêtes sans locale
+                $request->getSession()->set('_locale', $locale);
+            }
         } else {
             // Pour les URLs sans locale, utiliser celle sauvée en session
             $savedLocale = $request->getSession()->get('_locale', 'fr');
-            $request->setLocale($savedLocale);
+            if (is_string($savedLocale)) {
+                $request->setLocale($savedLocale);
+            }
         }
     }
 }

@@ -1,20 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% set features = [
+    {
+        'icon': 'flowbite:users-group-solid',
+        'title': 'homepage.features.collaboration.title',
+        'description': 'homepage.features.collaboration.description'
+    },
+    {
+        'icon': 'flowbite:clock-solid',
+        'title': 'homepage.features.estimation.title',
+        'description': 'homepage.features.estimation.description',
+    },
+    {
+        'icon': 'flowbite:chalkboard-solid',
+        'title': 'homepage.features.management.title',
+        'description': 'homepage.features.management.description'
+    },
+    {
+        'icon': 'flowbite:theatre-solid',
+        'title': 'homepage.features.voting.title',
+        'description': 'homepage.features.voting.description',
+    },
+    {
+        'icon': 'flowbite:shapes-solid',
+        'title': 'homepage.features.usability.title',
+        'description': 'homepage.features.usability.description'
+    },
+    {
+        'icon': 'flowbite:cloud-arrow-up-solid',
+        'title': 'homepage.features.cloud.title',
+        'description': 'homepage.features.cloud.description',
+    }
+] %}
+
+{% block title %}{{ 'homepage.title' | trans }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!-- Hero Section -->
+    <section class="bg-white dark:bg-gray-800">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                {{ 'homepage.hero.title' | trans }}
+            </h1>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+                {{ 'homepage.hero.subtitle' | trans }}
+            </p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                <a href="#"
+                   class="inline-flex gap-2 justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    {{ 'homepage.hero.cta_start' | trans }}
+                    {{ ux_icon('flowbite:arrow-right-outline',{ 'class' : 'w-6 h-6' }) }}
+                </a>
+                <a href="#features"
+                   class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    {{ 'homepage.hero.cta_learn' | trans }}
+                </a>
+            </div>
+        </div>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-50 dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+            <div class="max-w-screen-md mb-8 lg:mb-16">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                    {{ 'homepage.features.title' | trans }}
+                </h2>
+                <p class="text-gray-500 sm:text-xl dark:text-gray-400">
+                    {{ 'homepage.features.subtitle' | trans }}
+                </p>
+            </div>
+            <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                {% for feature in features %}
+                    <div class="flex flex-col items-center text-center">
+                        <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                            {{ ux_icon(feature.icon,{ 'class' : 'w-6 h-6 text-blue-600 dark:text-blue-300' }) }}
+                        </div>
+                        <h3 class="mb-2 text-xl font-bold dark:text-white">{{ feature.title | trans }}</h3>
+                        <p class="text-gray-500 dark:text-gray-400">
+                            {{ feature.description | trans }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/var/www/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <!-- CTA Section -->
+    <section class="bg-white dark:bg-gray-800">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 dark:text-white">
+                    {{ 'homepage.cta.title' | trans }}
+                </h2>
+                <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
+                    {{ 'homepage.cta.subtitle' | trans }}
+                </p>
+                <a href="#"
+                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    {{ 'homepage.cta.button' | trans }}
+                </a>
+            </div>
+        </div>
+    </section>
 {% endblock %}
