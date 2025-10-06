@@ -2,8 +2,8 @@
     <div class="flex flex-col w-full max-w-sm p-4 pb-2 mb-2 {{ bgColor }} rounded-lg shadow-sm" role="alert">
         <div class="flex items-center w-full mb-4">
             <div class="flex items-center justify-center shrink-0 w-8 h-8 {{ textColor }} {{ bgColor }} rounded-lg">
-                {{ ux_icon('flowbite:' ~ iconName, {'class': 'w-6 h-6'}) }}
-                <span class="sr-only">{{ type }} {{ 'flash_massage.screen_reader.icon'| trans }}</span>
+                {{ ux_icon('flowbite:' ~ iconName, {class: 'w-6 h-6'}) }}
+                <span class="sr-only">{{ type }} {{ 'flash_massage.screen_reader.icon'|trans }}</span>
             </div>
             <div class="ms-3 text-sm font-normal">{{ message }}</div>
             <button type="button"
@@ -11,7 +11,7 @@
                        focus:ring-gray-300 p-1.5 inline-flex items-center justify-center h-8 w-8
                        dark:hover:text-white"
                     data-dismiss-target="{{ closeTarget }}" aria-label="Close">
-                <span class="sr-only">{{ 'flash_massage.screen_reader.close_flash_message' | trans }}</span>
+                <span class="sr-only">{{ 'flash_massage.screen_reader.close_flash_message'|trans }}</span>
                 <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" aria-hidden="true">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6"></path>

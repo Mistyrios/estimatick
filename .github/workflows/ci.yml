@@ -87,7 +87,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        check: [ php-cs, phpcs, phpstan ]
+        check: [twig-cs, php-cs, phpcs, phpstan ]
 
     steps:
       - name: Checkout code
@@ -109,6 +109,11 @@ jobs:
       - name: Fix permissions for vendor binaries
         run: |
           chmod +x vendor/bin/*
+
+      - name: 🔍 Vérification du style avec TWIG-CS-Fixer
+        if: matrix.check == 'twig-cs'
+        run: |
+          ./vendor/bin/twig-cs-fixer lint ./templates/ && echo "✅ Les templates Twig sont correctement formatés." || (echo "❌ Les templates Twig ne sont pas correctement formatés. Veuillez exécuter 'vendor/bin/twig-cs-fixer fix' localement." && exit 1)
 
       - name: 🔍 Vérification du style avec PHP-CS-Fixer
         if: matrix.check == 'php-cs'

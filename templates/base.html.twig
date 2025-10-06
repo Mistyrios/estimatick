@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ 'global.site_name' | trans }} - {% block title %}{% endblock %}</title>
+    <title>{{ 'global.site_name'|trans }} - {% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ asset('icons/favicon.ico') }}" type="image/x-icon">
     {% block stylesheets %}{% endblock %}
 
@@ -19,13 +19,13 @@
         {% endblock %}
 </head>
 <body>
-{% include '_partials/_flash_messages.html.twig' %}
-{% include '_partials/_navbar.html.twig' %}
+{{ include('_partials/_flash_messages.html.twig') }}
+{{ include('_partials/_navbar.html.twig') }}
 <div class="main min-h-screen flex flex-col gap-8">
     <main class="w-full m-auto flex-grow">
         {% block body %}{% endblock %}
     </main>
 </div>
-{% include '_partials/_footer.html.twig' %}
+{{ include('_partials/_footer.html.twig') }}
 </body>
 </html>
