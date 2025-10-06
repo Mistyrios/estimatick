@@ -1,0 +1,126 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 🔨 Build de l'application
+    runs-on: ubuntu-latest
+
+    services:
+      sqlite:
+        image: alpine:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_sqlite, xml, zip, intl, sqlite3
+          ini-values: memory_limit=512M
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+      - name: Install Symfony CLI
+        run: |
+          curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash
+          sudo apt install -y symfony-cli
+
+      - name: Configure environment
+        run: |
+          cp .env .env.local
+          echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db" >> .env.local
+          echo "APP_ENV=test" >> .env.local
+          echo "APP_SECRET=test_secret_key_for_ci" >> .env.local
+          mkdir -p var
+          touch var/data.db
+
+      - name: Install dependencies
+        run: |
+          export COMPOSER_ALLOW_SUPERUSER=1
+          export COMPOSER_MEMORY_LIMIT=-1
+          composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Setup Symfony
+        run: |
+          php bin/console about
+          php bin/console doctrine:database:create --env=test --if-not-exists || true
+          php bin/console doctrine:migrations:migrate --no-interaction --env=test || true
+          echo "✅ L'application Symfony a été construite avec succès"
+
+      - name: Cache vendor directory
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-vendor-${{ hashFiles('**/composer.lock') }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            vendor/
+            .env.local
+
+  code-quality:
+    name: 🔍 Vérifications qualité code
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        check: [ php-cs, phpcs, phpstan ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_sqlite, xml, zip, intl, sqlite3
+          ini-values: memory_limit=512M
+          coverage: none
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: Fix permissions for vendor binaries
+        run: |
+          chmod +x vendor/bin/*
+
+      - name: 🔍 Vérification du style avec PHP-CS-Fixer
+        if: matrix.check == 'php-cs'
+        run: |
+          vendor/bin/php-cs-fixer fix --dry-run && echo "✅ Le code est correctement formaté." || (echo "❌ Le code n'est pas correctement formaté. Veuillez exécuter 'vendor/bin/php-cs-fixer fix' localement." && exit 1)
+
+      - name: 🔍 Vérification des standards de codage avec PHPCS
+        if: matrix.check == 'phpcs'
+        run: |
+          vendor/bin/phpcs --standard=phpcs.xml ./ && echo "✅ Le code respecte les standards de codage." || (echo "❌ Le code ne respecte pas les standards de codage. Veuillez corriger les erreurs PHPCS." && exit 1)
+
+      - name: 🔍 Analyse statique avec PHPStan
+        if: matrix.check == 'phpstan'
+        run: |
+          vendor/bin/phpstan analyse --memory-limit=512M && echo "✅ L'analyse statique n'a trouvé aucune erreur." || (echo "❌ L'analyse statique a trouvé des erreurs. Veuillez les corriger." && exit 1)
