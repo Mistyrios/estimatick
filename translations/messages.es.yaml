@@ -1,0 +1,51 @@
+global:
+  site_name: 'Estimatick'
+homepage:
+  title: "Inicio"
+  hero:
+    title: "Planning Poker Simplificado"
+    subtitle: "Estima eficientemente tus tareas de desarrollo con tu equipo utilizando nuestra intuitiva herramienta de planning poker. Fomenta la colaboración y obtén mejores resultados de planificación de sprint."
+    cta_start: "Iniciar una Sesión"
+    cta_learn: "Saber Más"
+  features:
+    title: "¿Por Qué Elegir Nuestro Planning Poker?"
+    subtitle: "Optimiza tu proceso de estimación con funcionalidades diseñadas para equipos de desarrollo."
+    collaboration:
+      title: "Colaboración en Equipo"
+      description: "Votación en tiempo real con todo tu equipo, fomentando una mejor comunicación y consenso."
+    estimation:
+      title: "Estimación Rápida"
+      description: "Estimación rápida y eficiente de tareas utilizando la secuencia de Fibonacci o juegos de cartas personalizados."
+    management:
+      title: "Gestión de Sesión"
+      description: "Crea, gestiona y haz seguimiento de tus sesiones de planificación con historial de votos detallado y análisis."
+    voting:
+      title: "Votación Anónima"
+      description: "Prevén sesgos con votación anónima hasta que todos los miembros del equipo hayan enviado sus estimaciones."
+    usability:
+      title: "Fácil de Usar"
+      description: "Interfaz simple e intuitiva que no requiere entrenamiento. Comienza a estimar en segundos."
+    cloud:
+      title: "Basado en la Nube"
+      description: "Accede a tus sesiones de planificación desde cualquier lugar. No requiere instalación, funciona en cualquier navegador."
+  cta:
+    title: "¿Listo para Mejorar tus Estimaciones de Tareas?"
+    subtitle: "Prueba nuestra nueva herramienta de planning poker y mejora la estimación de tareas de tu equipo."
+    button: "Crear una Sesión"
+footer:
+  slogan: "Estimaciones Colaborativas Hechas Simples"
+  copyright: "© 2025 Estimatick. Todos los derechos reservados."
+  navigation:
+    title: "Navegación"
+    home: "Inicio"
+    features: "Características"
+    documentation: "Documentación / Ayuda"
+  contact:
+    title: "Contacto"
+    form: "Formulario de contacto"
+  links:
+    legal_notice: "Aviso legal"
+    privacy_policy: "Política de privacidad"
+    personal_data: "Datos personales"
+  made_with_love: "Hecho con ❤️ para equipos de desarrollo"
+  credits: "Creado con pasión para equipos de desarrollo"

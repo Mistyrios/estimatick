@@ -1,41 +1,39 @@
 {% set dropdownId = dropdownId|default('language-dropdown-menu') %}
 {% set currentLocale = app.request.locale %}
 
-{# Configuration des langues disponibles #}
-{% set languages = {
-    en: {
-        name: 'English',
-        flag: 'emojione:flag-for-united-kingdom',
-    },
-    fr: {
-        name: 'Français',
-        flag: 'emojione:flag-for-france',
-    },
-} %}
+{# Configuration des langues disponibles depuis l'enum #}
+{% set languages = get_languages() %}
 
 {# Langue par défaut si locale actuelle non trouvée #}
-{% set currentLanguage = languages[currentLocale] ?? languages['fr'] %}
+{% set currentLanguage = get_current_language(currentLocale) %}
 
-<button type="button" data-dropdown-toggle="{{ dropdownId }}"
-        class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white gap-1">
-    {{ ux_icon(currentLanguage.flag, {class: 'w-5 h-5 mr-2'}) }}
-    {{ currentLanguage.name }}
-</button>
-<!-- Dropdown -->
-<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700"
-     id="{{ dropdownId }}">
-    <ul class="py-2 font-medium" role="none">
-        {% for locale, language in languages %}
-            <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({locale: locale})) }}"
-                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                   role="menuitem">
-                    <div class="flex items-center justify-between gap-1">
-                        {{ ux_icon(language.flag, {class: 'w-5 h-5 mr-2'}) }}
-                        {{ language.name }}
-                    </div>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+<div data-controller="language-switcher" data-language-switcher-api-url-value="{{ path('api_set_locale') }}">
+
+    <button type="button"
+            data-dropdown-toggle="{{ dropdownId }}"
+            class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white gap-1">
+        {{ ux_icon(currentLanguage.flag, {class: 'w-5 h-5 mr-2'}) }}
+        {{ currentLanguage.name }}
+    </button>
+
+    <!-- Dropdown -->
+    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700"
+         id="{{ dropdownId }}">
+        <ul class="py-2 font-medium" role="none">
+            {% for locale, language in languages %}
+                <li>
+                    <a href="#"
+                       data-action="click->language-switcher#selectLanguage"
+                       data-locale="{{ locale }}"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                       role="menuitem">
+                        <div class="flex items-center justify-between gap-1">
+                            {{ ux_icon(language.flag, {class: 'w-5 h-5 mr-2'}) }}
+                            {{ language.name }}
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
